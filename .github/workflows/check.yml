@@ -3,6 +3,7 @@ on:
   pull_request:
   push:
     branches: [main]
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
@@ -10,9 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Leak check (config, skill and docs only; no engine code, data or secrets)
+      # Pull-request runs execute PR-controlled code, so they get no secrets and
+      # run the generic checks only. The private patterns run on main and on
+      # demand; maintainers also run them locally before merging.
+      - name: Leak check, generic (config, skill and docs only; no engine code, data or secrets)
+        if: github.event_name == 'pull_request'
+        run: bash scripts/check-no-leaks.sh
+      - name: Leak check, generic + private patterns
+        if: github.event_name != 'pull_request'
         env:
           LEAK_EXTRA_PATTERNS: ${{ secrets.LEAK_EXTRA_PATTERNS }}
+          LEAK_REQUIRE_PRIVATE: "1"
         run: bash scripts/check-no-leaks.sh
       - uses: actions/setup-node@v4
         with:

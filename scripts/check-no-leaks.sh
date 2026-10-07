@@ -18,10 +18,18 @@ while IFS= read -r f; do
   [[ "$f" =~ $allowed ]] || report "file not on the allow-list: $f"
 done < <(git ls-files)
 
-# 2. The only MCP server is the public engine endpoint, with no static headers.
-mcp=plugins/emodely-engine/.mcp.json
-if ! grep -q '"url": "https://engine.emodely.com/mcp"' "$mcp"; then report "$mcp must point at https://engine.emodely.com/mcp"; fi
-if grep -qiE '"(headers|headersHelper|env|command|args)"' "$mcp"; then report "$mcp must not carry headers, env or commands"; fi
+# 2. The plugin's only component config: exactly one MCP server, the public
+#    engine endpoint, with no headers; the manifest declares no components.
+py=python3; "$py" -c 1 2>/dev/null || py=python
+"$py" - <<'PY' || report "MCP server map or plugin manifest is not exactly the approved config"
+import json, sys
+mcp = json.load(open("plugins/emodely-engine/.mcp.json", encoding="utf-8"))
+ok = mcp == {"mcpServers": {"emodely-engine": {"type": "http", "url": "https://engine.emodely.com/mcp"}}}
+manifest = json.load(open("plugins/emodely-engine/.claude-plugin/plugin.json", encoding="utf-8"))
+allowed = {"name", "displayName", "version", "description", "author", "homepage", "license", "keywords"}
+ok = ok and set(manifest) <= allowed
+sys.exit(0 if ok else 1)
+PY
 
 # 3. Generic forbidden content.
 patterns=(
@@ -29,6 +37,7 @@ patterns=(
   'supabase\.(co|in)'                                 # database / auth project hosts
   'emk_[A-Za-z0-9_-]{8,}|sb_(secret|publishable)_|eyJ[A-Za-z0-9_-]{10,}|BEGIN [A-Z ]*PRIVATE KEY|gh[pousr]_[A-Za-z0-9]{20,}'
   '(api[_-]?key|secret|password|token)["'"'"' ]*[:=] *["'"'"'][^"'"'"' $]{8,}'
+  '(api[_-]?key|secret|password|token)[A-Za-z0-9_]*["'"'"' ]*[:=] *[A-Za-z0-9_+/=-]{12,}'   # unquoted values
   '[0-9]\.[0-9]{4,}'                                  # high-precision numbers (coefficients), any layout
   '[0-9][eE][-+][0-9]+'                               # scientific notation
 )
@@ -41,13 +50,11 @@ if [[ -n "${LEAK_EXTRA_PATTERNS:-}" ]]; then
     if grep -qE -- "$p" /dev/null; [[ $? -ge 2 ]]; then report "a private pattern is not a valid extended regex"; continue; fi
     extra+=("$p")
   done <<< "$LEAK_EXTRA_PATTERNS"
-elif [[ -n "${CI:-}" ]]; then
-  report "LEAK_EXTRA_PATTERNS is not set (repository secret missing)"
 else
   echo "warning: LEAK_EXTRA_PATTERNS not set; private patterns skipped" >&2
 fi
-
-if [[ -n "${CI:-}" && ${#extra[@]} -eq 0 ]]; then report "LEAK_EXTRA_PATTERNS holds no usable pattern"; fi
+# CI on main sets LEAK_REQUIRE_PRIVATE=1 (pull-request runs get no secrets).
+if [[ -n "${LEAK_REQUIRE_PRIVATE:-}" && ${#extra[@]} -eq 0 ]]; then report "LEAK_EXTRA_PATTERNS is missing or holds no usable pattern"; fi
 
 # Every tracked file, this script included (its generic patterns are written
 # so that they do not match their own text).
@@ -57,11 +64,11 @@ while IFS= read -r f; do
   done
   # GitHub references: only this plugin repository may be named.
   while IFS= read -r ref; do
-    [[ "$ref" == "Ahlabeeb/emodely-claude-plugin" ]] || report "$f names another repository"
-  done < <(grep -oE '(github\.com/|marketplace add +)[A-Za-z0-9._-]+/[A-Za-z0-9._-]+' "$f" | sed -E 's#^(github\.com/|marketplace add +)##; s#\.git$##')
+    [[ "$ref" == "ahlabeeb/emodely-claude-plugin" ]] || report "$f names another repository"
+  done < <(grep -oiE '(github\.com[/:]|marketplace add +)[A-Za-z0-9._-]+/[A-Za-z0-9._-]+' "$f" | sed -E 's#^(github\.com[/:]|marketplace add +)##I; s#\.git$##I' | tr 'A-Z' 'a-z')
   while IFS= read -r ref; do
-    [[ "$ref" == "Ahlabeeb/emodely-claude-plugin" ]] || report "$f names another repository"
-  done < <(grep -oE 'Ahlabeeb/[A-Za-z0-9._-]+' "$f")
+    [[ "$ref" == "ahlabeeb/emodely-claude-plugin" ]] || report "$f names another repository"
+  done < <(grep -oiE 'Ahlabeeb/[A-Za-z0-9._-]+' "$f" | tr 'A-Z' 'a-z')
 done < <(git ls-files)
 
 if [[ $fail -ne 0 ]]; then exit 1; fi
