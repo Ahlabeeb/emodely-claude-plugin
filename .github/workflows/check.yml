@@ -1,0 +1,29 @@
+name: check
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Leak check (config, skill and docs only; no engine code, data or secrets)
+        env:
+          LEAK_EXTRA_PATTERNS: ${{ secrets.LEAK_EXTRA_PATTERNS }}
+        run: bash scripts/check-no-leaks.sh
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate marketplace and plugin
+        run: |
+          npm install -g @anthropic-ai/claude-code@2.1.285
+          claude plugin validate .
+          claude plugin validate ./plugins/emodely-engine --strict
+      - name: Build the claude.ai upload zip
+        run: |
+          zip=$(bash scripts/package-plugin.sh)
+          unzip -l "$zip"
+          unzip -l "$zip" | grep -q '.claude-plugin/plugin.json'

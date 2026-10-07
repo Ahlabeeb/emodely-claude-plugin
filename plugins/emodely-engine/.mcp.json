@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "emodely-engine": {
+      "type": "http",
+      "url": "https://engine.emodely.com/mcp"
+    }
+  }
+}
