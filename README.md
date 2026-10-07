@@ -18,6 +18,8 @@ Pick the app you use. A plugin you add on claude.ai also appears in the Claude d
 4. A browser window opens on engine.emodely.com. Sign in with your eModely engine account, then click **Allow**.
 5. In a chat, click **+ > Connectors** and check that **emodely-engine** is switched on.
 
+On a Team or Enterprise plan, an Owner must first add the connector for the organization; members then connect with their own eModely account.
+
 If you only want the connection without the plugin's instructions, add it as a custom connector instead: **Customize > Connectors > Add custom connector**, name `eModely Engine`, URL `https://engine.emodely.com/mcp`, leave **Advanced settings** empty, click **Add**, then **Connect** and sign in as in step 4. The engine's own built-in guidance still applies.
 
 ### Claude Code

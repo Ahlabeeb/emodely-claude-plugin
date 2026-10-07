@@ -47,8 +47,11 @@ else
   echo "warning: LEAK_EXTRA_PATTERNS not set; private patterns skipped" >&2
 fi
 
+if [[ -n "${CI:-}" && ${#extra[@]} -eq 0 ]]; then report "LEAK_EXTRA_PATTERNS holds no usable pattern"; fi
+
+# Every tracked file, this script included (its generic patterns are written
+# so that they do not match their own text).
 while IFS= read -r f; do
-  [[ "$f" == scripts/check-no-leaks.sh ]] && continue
   for p in "${patterns[@]}" "${extra[@]}"; do
     if grep -qEi -- "$p" "$f"; then report "$f matches a forbidden pattern (line $(grep -nEi -- "$p" "$f" | head -1 | cut -d: -f1))"; fi
   done
@@ -60,11 +63,6 @@ while IFS= read -r f; do
     [[ "$ref" == "Ahlabeeb/emodely-claude-plugin" ]] || report "$f names another repository"
   done < <(grep -oE 'Ahlabeeb/[A-Za-z0-9._-]+' "$f")
 done < <(git ls-files)
-
-# The scanner itself: generic only (it is excluded from the content scan above).
-for p in "${extra[@]}"; do
-  if grep -qEi -- "$p" scripts/check-no-leaks.sh; then report "scripts/check-no-leaks.sh contains a private pattern"; fi
-done
 
 if [[ $fail -ne 0 ]]; then exit 1; fi
 echo "leak check passed ($(git ls-files | wc -l | tr -d ' ') files, ${#extra[@]} private patterns)"

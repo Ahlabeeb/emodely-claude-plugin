@@ -36,7 +36,7 @@ Use `save_plant`, `list_my_plants`, `get_run`, `compare_scenarios` or `search_ch
 
 ## When the connector is missing or refuses
 
-- No eModely engine tools available: tell the user to connect the eModely Engine connector and sign in (see the plugin README). Do not estimate results yourself.
+- No eModely engine tools available: tell the user to connect the eModely Engine connector and sign in (claude.ai or Desktop: the plugin's **Connectors** tab; Claude Code: `/mcp`). Do not estimate results yourself.
 - The connector asks to sign in again: the session expired or the credentials are wrong; have the user reconnect and sign in.
 - Signed in but access is denied: the account has no active eModely engine subscription; tell the user to contact eModely.
 - An upload link has expired or was refused: call `request_epw_upload` for a fresh one.
