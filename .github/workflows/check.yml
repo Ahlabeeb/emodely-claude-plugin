@@ -1,0 +1,39 @@
+name: check
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Pull-request runs execute PR-controlled code, so this workflow does not
+      # pass them the secret (GitHub would, for same-repo branches): they run
+      # the generic checks only. The private patterns run on main and on
+      # demand; maintainers also run them locally before merging.
+      - name: Leak check, generic (config, skill and docs only; no engine code, data or secrets)
+        if: github.event_name == 'pull_request' || github.ref != 'refs/heads/main'
+        run: bash scripts/check-no-leaks.sh
+      - name: Leak check, generic + private patterns
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          LEAK_EXTRA_PATTERNS: ${{ secrets.LEAK_EXTRA_PATTERNS }}
+          LEAK_REQUIRE_PRIVATE: "1"
+        run: bash scripts/check-no-leaks.sh
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate marketplace and plugin
+        run: |
+          npm install -g @anthropic-ai/claude-code@2.1.285
+          claude plugin validate .
+          claude plugin validate ./plugins/emodely-engine --strict
+      - name: Build the claude.ai upload zip
+        run: |
+          zip=$(bash scripts/package-plugin.sh)
+          unzip -l "$zip"
+          unzip -l "$zip" | grep -q '.claude-plugin/plugin.json'

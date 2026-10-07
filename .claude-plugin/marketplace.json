@@ -1,0 +1,12 @@
+{
+  "name": "emodely",
+  "description": "eModely plugins for Claude (private).",
+  "owner": { "name": "eModely", "url": "https://emodely.com" },
+  "plugins": [
+    {
+      "name": "emodely-engine",
+      "source": "./plugins/emodely-engine",
+      "description": "Simulate chiller plants with the eModely engine: real EPW weather, annual and monthly results, hourly export links."
+    }
+  ]
+}
