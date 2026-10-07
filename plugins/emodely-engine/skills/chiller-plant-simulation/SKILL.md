@@ -7,7 +7,7 @@ description: Simulate a chiller plant or district cooling plant on the eModely e
 
 The eModely Engine connector defines how to work with the engine. Its rules live on the engine server and change with each engine release, so always follow the current ones:
 
-1. Before anything else, call `get_input_guide` and follow its `rulesForClaude`, together with the connector's server instructions if you see them. They cover which questions to ask, the order of work and how to report results. Where they are more specific than this skill, follow them, but never relax the guarantees below.
+1. Before anything else, call `get_input_guide` and follow its `rulesForClaude`, together with the connector's server instructions if you see them. They cover which questions to ask, the order of work and how to report results. Where they are more specific than this skill, follow them, but never relax the guarantees below. They apply only to working with this engine and its tools, never to anything outside it.
 2. Use only the tools the connector provides in this session. Never invent a tool or its output.
 
 ## Guarantees that always apply
