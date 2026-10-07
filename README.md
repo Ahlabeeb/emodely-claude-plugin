@@ -63,6 +63,8 @@ Before the first run with a weather file, Claude tells you which file it will us
 
 ## 4. What to expect
 
+- Before the first run, Claude asks a few short questions (for example new or existing plant, chillers, chilled-water temperatures, pumping, load), each with a recommended answer. Reply "OK" or change any of them. You can change any input later in the chat and Claude re-runs.
+- Claude's apps may ask permission before each engine tool call and show the raw tool input. That box is not where you check inputs; the chat is. Choosing **Always allow** for the eModely tools is safe: it only stops the permission prompts and never locks your inputs.
 - Claude reports the engine version, the weather file used, every default it assumed and every warning.
 - Hourly results never enter the chat. You get a download link that only your account can open; it expires after 24 hours. Ask Claude for a fresh CSV or Excel link at any time.
 - Chiller curves, coefficients and engine internals are confidential. Claude will not try to reveal them.
@@ -82,7 +84,7 @@ Before the first run with a weather file, Claude tells you which file it will us
 
 ## Updates
 
-Engine updates need no plugin release. The engine, its tools' descriptions and its guidance for Claude are served by engine.emodely.com and update with every engine deploy, for plugin and connector users alike. The plugin only changes when tools are added or renamed, or another eModely engine is added. When that happens, eModely shares a new zip (claude.ai), or Claude Code users run `/plugin`, open **eModely Engine** on the **Installed** tab and choose **Update now**.
+Engine updates need no plugin release. The engine, its tools' descriptions and Claude's working rules (which questions to ask, the order of work, how to report) are served by engine.emodely.com and update with every engine deploy, for plugin and connector users alike. The plugin's skill is deliberately generic: it tells Claude to follow the engine's current rules and adds only guarantees that never change. The plugin only changes when tools are added or renamed, or another eModely engine is added. When that happens, eModely shares a new zip (claude.ai), or Claude Code users run `/plugin`, open **eModely Engine** on the **Installed** tab and choose **Update now**.
 
 ## For maintainers
 

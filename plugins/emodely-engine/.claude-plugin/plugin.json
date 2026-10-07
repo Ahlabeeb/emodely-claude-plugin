@@ -1,7 +1,7 @@
 {
   "name": "emodely-engine",
   "displayName": "eModely Engine",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Simulate chiller plants with the eModely engine from a conversation: real EPW weather, annual and monthly energy, kW/TR, peak demand and a downloadable hourly export. Requires an eModely engine subscription.",
   "author": { "name": "eModely", "url": "https://emodely.com" },
   "homepage": "https://emodely.com",
