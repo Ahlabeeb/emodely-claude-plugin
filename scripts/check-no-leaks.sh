@@ -34,7 +34,13 @@ patterns=(
 )
 extra=()
 if [[ -n "${LEAK_EXTRA_PATTERNS:-}" ]]; then
-  while IFS= read -r p; do [[ -n "$p" ]] && extra+=("$p"); done <<< "$LEAK_EXTRA_PATTERNS"
+  while IFS= read -r p; do
+    p=${p%$'\r'}
+    [[ -n "$p" ]] || continue
+    # A pattern grep cannot parse would silently match nothing, so reject it.
+    if grep -qE -- "$p" /dev/null; [[ $? -ge 2 ]]; then report "a private pattern is not a valid extended regex"; continue; fi
+    extra+=("$p")
+  done <<< "$LEAK_EXTRA_PATTERNS"
 elif [[ -n "${CI:-}" ]]; then
   report "LEAK_EXTRA_PATTERNS is not set (repository secret missing)"
 else
