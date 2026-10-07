@@ -4,7 +4,7 @@ Simulate chiller plants and district cooling plants from a conversation with Cla
 
 The numbers come from the eModely engine running on eModely's servers, not from an AI estimate. This plugin contains only connection settings and instructions for Claude. It contains no engine code or data.
 
-**You need** an eModely engine account with an active subscription. Accounts are created by eModely; contact eModely to get one.
+**You need** an eModely engine account with an active subscription (accounts are created by eModely; contact eModely to get one), and a paid Claude plan (Pro, Max, Team or Enterprise) to add plugins on claude.ai and Desktop.
 
 ## 1. Install
 
@@ -33,7 +33,7 @@ eModely gives you read access to this GitHub repository. Claude Code clones it w
 
 Choose **Install for you (user scope)**. Then run `/mcp`, select `plugin:emodely-engine:emodely-engine`, choose **Authenticate**, and sign in and click **Allow** in the browser window that opens.
 
-If you already added the plugin on claude.ai, skip the install: it is synced into Claude Code as `emodely-engine@synced` (Claude Code signed in with the same claude.ai account). You still run `/mcp` once to sign in.
+If you already added the plugin on claude.ai and run Claude Code 2.1.273 or later signed in with the same claude.ai account, skip the install: it is synced into Claude Code as `emodely-engine@synced`. On older versions, install from the marketplace as above. You still run `/mcp` once to sign in.
 
 **API key instead of browser sign-in (Claude Code only).** If eModely issued you a personal API key, set it as the environment variable `EMODELY_API_KEY` and add the server yourself. Keep the single quotes (bash, zsh or PowerShell), so the config stores the `${EMODELY_API_KEY}` reference and not the key itself:
 

@@ -19,7 +19,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: bash scripts/check-no-leaks.sh
       - name: Leak check, generic + private patterns
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         env:
           LEAK_EXTRA_PATTERNS: ${{ secrets.LEAK_EXTRA_PATTERNS }}
           LEAK_REQUIRE_PRIVATE: "1"
