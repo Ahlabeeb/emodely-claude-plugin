@@ -36,8 +36,12 @@ patterns=(
   '([0-9]{1,3}\.){3}[0-9]{1,3}'                       # IPv4 literals (servers)
   'supabase\.(co|in)'                                 # database / auth project hosts
   'emk_[A-Za-z0-9_-]{8,}|sb_(secret|publishable)_|eyJ[A-Za-z0-9_-]{10,}|BEGIN [A-Z ]*PRIVATE KEY|gh[pousr]_[A-Za-z0-9]{20,}'
-  '(api[_-]?key|secret|password|token)["'"'"' ]*[:=] *["'"'"'][^"'"'"' $]{8,}'
-  '(api[_-]?key|secret|password|token)[A-Za-z0-9_]*["'"'"' ]*[:=] *[A-Za-z0-9_+/=-]{12,}'   # unquoted values
+  # credential-looking assignments: any key containing apikey/api_key/secret/
+  # password/passwd/token/credential, quoted or not, any whitespace; values that
+  # are ${VAR} / ${{ }} / <placeholder> references are allowed
+  '(api[_-]?key|secret|passw(or)?d|token|credential)[A-Za-z0-9_.-]*["'"'"']?[[:space:]]*[:=][[:space:]]*["'"'"']?[^[:space:]"'"'"'$<{][^[:space:]"'"'"']{7,}'
+  '(Bearer|Basic)[[:space:]]+[A-Za-z0-9._~+/=-]{16,}'  # literal Authorization values
+  'AKIA[0-9A-Z]{16}|xox[abpr]-[A-Za-z0-9-]{10,}|sk-[A-Za-z0-9_-]{20,}'
   '[0-9]\.[0-9]{4,}'                                  # high-precision numbers (coefficients), any layout
   '[0-9][eE][-+][0-9]+'                               # scientific notation
 )
@@ -68,7 +72,7 @@ while IFS= read -r f; do
   done < <(grep -oiE '(github\.com[/:]|marketplace add +)[A-Za-z0-9._-]+/[A-Za-z0-9._-]+' "$f" | sed -E 's#^(github\.com[/:]|marketplace add +)##I; s#\.git$##I' | tr 'A-Z' 'a-z')
   while IFS= read -r ref; do
     [[ "$ref" == "ahlabeeb/emodely-claude-plugin" ]] || report "$f names another repository"
-  done < <(grep -oiE 'Ahlabeeb/[A-Za-z0-9._-]+' "$f" | tr 'A-Z' 'a-z')
+  done < <(grep -oiE 'Ahlabeeb/[A-Za-z0-9._-]+' "$f" | sed -E 's#\.git$##I' | tr 'A-Z' 'a-z')
 done < <(git ls-files)
 
 if [[ $fail -ne 0 ]]; then exit 1; fi
