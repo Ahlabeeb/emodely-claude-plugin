@@ -6,7 +6,7 @@ Simulate chiller plants and district cooling plants by talking to Claude. You de
 
 **Who it is for:** HVAC and district cooling engineers, energy consultants and plant operators who want annual plant energy without building a model by hand.
 
-**What you get for each run:** annual and monthly energy, kW/TR, peak electrical demand, the split between chillers, pumps and cooling towers, staging hours, warnings, and a download link for the 8,760 hourly results (CSV or Excel).
+**What you get for each run:** annual and monthly energy, kW/TR, peak electrical demand, the split between chillers, pumps and cooling towers, staging hours, warnings, and a download link for the hourly results (CSV or Excel).
 
 **What you need:**
 
@@ -72,8 +72,8 @@ The plugin adds the connector and a skill that guides Claude. It needs a paid pl
 2. Add the plugin in one of two ways:
    - **Add marketplace.** Enter `Ahlabeeb/emodely-claude-plugin`, then add **eModely Engine** from that marketplace.
    - **Upload plugin.** Download `emodely-engine-<version>.zip` from the [latest release](https://github.com/Ahlabeeb/emodely-claude-plugin/releases/latest) and upload it. Do not unzip it.
-3. Open the **eModely Engine** plugin, go to its **Connectors** tab, and click **Connect** next to `emodely-engine`.
-4. A browser window opens on engine.emodely.com. Sign in and click **Allow**.
+3. Open the **eModely Engine** plugin and go to its **Connectors** tab. If `emodely-engine` shows **Not added**, click **Add** first. On a Team or Enterprise plan, an Owner may have to add it for the organization (see below).
+4. Click **Connect** next to `emodely-engine`. A browser window opens on engine.emodely.com. Sign in and click **Allow**.
 5. In a new chat, click **+ > Connectors** and check that **emodely-engine** is switched on.
 
 ### claude.ai and the Claude desktop app: connector only
@@ -143,7 +143,7 @@ Reply "OK" to accept everything, or change any item. You can change inputs later
 > - Seasonal swing: 0.577 kW/TR in January, 0.788 kW/TR in August.
 > - Warning: in 4 hours of the year the plant missed the load by up to 23 TR.
 > - Settings left at engine defaults: tariff, emissions factor, pump and fan efficiency, condenser-water set-point.
-> - Hourly data: a CSV download link (8,760 rows) that only your account can open, valid for 24 hours.
+> - Hourly data: a CSV download link that only your account can open, valid for 24 hours.
 
 ## 3. Weather files
 
@@ -159,6 +159,7 @@ Before the first run with a weather file, Claude tells you which file it will us
 - **Permission prompts.** Claude's apps may ask permission before each engine tool call and show the raw tool input. Check your inputs in the chat, not in that box. Choosing **Always allow** for the eModely tools stops the prompts. Claude still asks its questions and confirms the weather file in the chat.
 - **What Claude reports.** Claude states the engine version, the weather file used, every default it assumed and every warning.
 - **Hourly results.** Hourly results never enter the chat. You get a download link that only your account can open. It expires after 24 hours. Ask Claude for a fresh CSV or Excel link at any time.
+- **Rows in the hourly file.** The file has one row per simulated hour, up to 8,760. Hours outside the plant's operating window, or below its minimum load, are left out. Use the `Hour`, `Month` and `HourOfDay` columns to place each row in the year.
 - **Confidential internals.** Chiller curves, coefficients and engine internals are confidential. Claude will not try to reveal them.
 - **Fair-use limits.** Currently 60 simulations and 30 export links per hour.
 
@@ -194,7 +195,7 @@ No. This repository holds only the plugin settings and the instructions Claude f
 
 ### Can Claude see my hourly data?
 
-No. Claude sees the annual and monthly summaries, plus an average profile by month and hour of day. The 8,760 hourly values go only to the download link.
+No. Claude sees the annual and monthly summaries, plus an average profile by month and hour of day. The hourly values go only to the download link.
 
 ## 6. Troubleshooting
 
