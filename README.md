@@ -81,8 +81,8 @@ The plugin adds the connector and a skill that guides Claude. It needs a paid pl
 This works on every plan, including Free. Claude still follows the engine's own guidance.
 
 1. Open **Customize > Connectors**, click **Add**, then **Add custom connector**. On some accounts it is **Add**, then **Custom**, then **Web**.
-2. Enter the name `eModely Engine` and the URL `https://engine.emodely.com/mcp`, then click **Continue**. Keep **Sign in now** under Authentication and **Register automatically** under OAuth client (both are selected for you), add no request headers, and click **Add**. Older versions of the dialog show **Advanced settings** and an **Add** button straight away: leave the advanced settings empty and click **Add**.
-3. Click **Connect**, sign in on engine.emodely.com, and click **Allow**. If the connector shows as connected straight away, you signed in before and there is nothing more to do.
+2. Enter the name `eModely Engine` and the URL `https://engine.emodely.com/mcp`, then click **Continue**. Select **Sign in now** under Authentication and **Register automatically** under OAuth client (usually already selected), add no request headers, and click **Add**. Older versions of the dialog show **Advanced settings** and an **Add** button straight away: leave the advanced settings empty, click **Add**, and choose the same two options if asked.
+3. If no sign-in window opens, click **Connect**. Sign in on engine.emodely.com and click **Allow**. If the connector shows as connected straight away, you signed in before and there is nothing more to do.
 4. In a new chat, click **+ > Connectors** and check that **eModely Engine** is switched on.
 
 If you already added this custom connector, the plugin uses it, so there is nothing to remove.
@@ -100,7 +100,7 @@ If eModely issued you a personal API key, you can use it instead of browser sign
    claude mcp add --scope user --transport http emodely-engine-key https://engine.emodely.com/mcp --header 'Authorization: Bearer ${EMODELY_API_KEY}'
    ```
 
-3. Run `/mcp` and check that `emodely-engine-key` is connected. Claude Code hides the plugin's own `emodely-engine` server while a server with the same address is configured, so the tools appear once. If `/mcp` still lists `emodely-engine`, disable it.
+3. Run `/mcp` and check that `emodely-engine-key` is connected. Recent versions of Claude Code hide the plugin's own `emodely-engine` server while a server with the same address is configured, so the tools appear once. If `/mcp` still lists `emodely-engine`, disable it.
 
 The plugin cannot carry the key itself, because a key header would turn off browser sign-in for everyone else.
 
