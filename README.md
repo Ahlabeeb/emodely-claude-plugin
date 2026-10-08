@@ -70,7 +70,7 @@ The plugin adds the connector and a skill that guides Claude. It needs a paid pl
 
 1. Open **Customize > Plugins**, then **Add**.
 2. Add the plugin in one of two ways:
-   - **Add marketplace.** Enter `Ahlabeeb/emodely-claude-plugin`, then add **eModely Engine** from that marketplace.
+   - **Add marketplace.** Choose **Add marketplace**, then **Add from a repository**. Enter `Ahlabeeb/emodely-claude-plugin` (or paste its GitHub URL), select it, leave **Sync automatically** on and click **Sync**. Then click **Add** next to **eModely Engine**.
    - **Upload plugin.** Download `emodely-engine-<version>.zip` from the [latest release](https://github.com/Ahlabeeb/emodely-claude-plugin/releases/latest) and upload it. Do not unzip it.
 3. Open the **eModely Engine** plugin and go to its **Connectors** tab. `emodely-engine` may show **Not added**; that is expected. On a Team or Enterprise plan, an Owner may have to add it for the organization (see below).
 4. Click **Connect** next to `emodely-engine` (or **Add**, then **Connect**, if both are shown). If a connector dialog opens with the name and URL filled in, click **Continue**, keep **Sign in now** and **Register automatically**, and click **Add**. Sign in on engine.emodely.com and click **Allow**. If no sign-in window opens, click **Connect** again. If it shows **Connected** straight away, you signed in before.
@@ -236,7 +236,7 @@ Engine updates need no plugin release. These parts are served by engine.emodely.
 
 The plugin changes only when tools are added or renamed, or when another eModely engine is added. When that happens:
 
-- **claude.ai and the desktop app.** Marketplace users choose **Check for updates**. Zip users download the new release, remove the old plugin and upload the new one.
+- **claude.ai and the desktop app.** Marketplace users with **Sync automatically** on get updates without doing anything. Zip users download the new release, remove the old plugin and upload the new one.
 - **Claude Code.** Run `/plugin`, open **eModely Engine** on the **Installed** tab, and choose **Update now**.
 
 ## For maintainers
