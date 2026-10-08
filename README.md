@@ -84,7 +84,7 @@ Before the first run with a weather file, Claude tells you which file it will us
 
 ## Terms of use
 
-Use of the engine is subject to the eModely Engine Terms of Use at <https://engine.emodely.com/terms>. They are currently a **draft pending legal review**. Results are engineering estimates: check the inputs and results, and you remain responsible for design and investment decisions. Reverse engineering the engine, or running systematic series of simulations to map its behaviour, is not allowed.
+Use of the engine is subject to the eModely Engine Terms of Use at <https://engine.emodely.com/terms>. Results are engineering estimates: check the inputs and results, and you remain responsible for design and investment decisions. Reverse engineering the engine, or running systematic series of simulations to map its behaviour, is not allowed.
 
 ## Updates
 
