@@ -81,11 +81,11 @@ The plugin adds the connector and a skill that guides Claude. It needs a paid pl
 This works on every plan, including Free. Claude still follows the engine's own guidance.
 
 1. Open **Customize > Connectors** and click **Add custom connector**. On some accounts the button is **Add**, then **Custom**, then **Web**.
-2. Enter the name `eModely Engine` and the URL `https://engine.emodely.com/mcp`. Leave **Advanced settings** empty, then click **Add**.
+2. Enter the name `eModely Engine` and the URL `https://engine.emodely.com/mcp`. Leave **Advanced settings** empty, then click **Add**. If the dialog asks how people sign in, choose **Sign in now**. If it asks about the OAuth client, choose **Register automatically**.
 3. Click **Connect**, sign in on engine.emodely.com, and click **Allow**.
 4. In a new chat, click **+ > Connectors** and check that **eModely Engine** is switched on.
 
-Do not add both the plugin and the custom connector. Claude would see every tool twice.
+If you already added this custom connector, the plugin uses it, so there is nothing to remove.
 
 **Team and Enterprise plans.** An Owner first adds the connector under **Organization settings > Connectors**: **Add**, then **Custom**, then **Web**, with the URL above. Each member then connects under **Customize > Connectors** with their own eModely account.
 
@@ -158,7 +158,7 @@ Before the first run with a weather file, Claude tells you which file it will us
 
 - **Permission prompts.** Claude's apps may ask permission before each engine tool call and show the raw tool input. Check your inputs in the chat, not in that box. Choosing **Always allow** for the eModely tools stops the prompts. Claude still asks its questions and confirms the weather file in the chat.
 - **What Claude reports.** Claude states the engine version, the weather file used, every default it assumed and every warning.
-- **Hourly results.** Hourly results never enter the chat. You get a download link that only your account can open. It expires after 24 hours. Ask Claude for a fresh CSV or Excel link at any time.
+- **Hourly results.** Hourly results never enter the chat. You get a download link that only your account can open. It expires within 24 hours. Ask Claude for a fresh CSV or Excel link at any time.
 - **Rows in the hourly file.** The file has one row per simulated hour, up to 8,760. Hours outside the plant's operating window, or below its minimum load, are left out. Use the `Hour`, `Month` and `HourOfDay` columns to place each row in the year.
 - **Confidential internals.** Chiller curves, coefficients and engine internals are confidential. Claude will not try to reveal them.
 - **Fair-use limits.** Currently 60 simulations and 30 export links per hour.
