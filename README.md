@@ -100,7 +100,7 @@ If eModely issued you a personal API key, you can use it instead of browser sign
    claude mcp add --scope user --transport http emodely-engine-key https://engine.emodely.com/mcp --header 'Authorization: Bearer ${EMODELY_API_KEY}'
    ```
 
-3. Disable the plugin's own `emodely-engine` server in `/mcp`, so Claude does not see the tools twice.
+3. Run `/mcp` and check that `emodely-engine-key` is connected. Claude Code hides the plugin's own `emodely-engine` server while a server with the same address is configured, so the tools appear once. If `/mcp` still lists `emodely-engine`, disable it.
 
 The plugin cannot carry the key itself, because a key header would turn off browser sign-in for everyone else.
 
