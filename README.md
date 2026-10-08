@@ -126,7 +126,7 @@ Start a new chat and try one of these prompts:
 - **Detailed.** One topic per message: load, chillers, temperatures, pumps, towers and operation.
 - **Just assume.** You give only the city and the plant size, and Claude assumes the rest.
 
-Questions are numbered, with lettered choices and the recommended choice marked. Reply with your picks, for example "1b, 2 assume". Anything you skip takes the recommended answer. With the questions, Claude names the weather file: city, station, source and period, for example "Dubai Intl AP, eModely library, SRC-TMYx, 2009-2023". A reply that does not object accepts the answers and the file. Every assumption is listed in the results. You can change inputs later in the chat, and Claude re-runs.
+Questions are numbered, with lettered choices and the recommended choice marked. Reply with your picks, for example "1b, 2 assume". Anything you skip takes the recommended answer. With the questions (or in the results, if you chose Just assume), Claude names the weather file: city, station, source and period, for example "Dubai Intl AP, eModely library, SRC-TMYx, 2009-2023". A reply that does not object accepts the answers and the file. Every assumption is listed in the results. You can change inputs later in the chat, and Claude re-runs.
 
 **What the results look like.** This is a shortened example from a real run: 1,000 TR water-cooled plant in Dubai, two chillers, constant-speed pumps.
 
@@ -153,11 +153,11 @@ Every run uses a real EPW weather file. The engine never generates weather.
 - **The eModely library** covers Gulf and MENA cities. Name your project city and Claude finds the file.
 - **Your own file.** Ask Claude to upload a weather file. Claude gives you a link that is valid for 30 minutes. Open it, sign in with the same account, and upload the `.epw`. Your file is private to your account. For the same city, it is used before the library file. The file never passes through the chat.
 
-Before the first run with a weather file, Claude tells you which file it will use (city, station, source and period). A reply that does not object accepts it. If you ask Claude to assume everything and the city match is clear, Claude runs straight away and names the file in the results. If several cities share the name, you choose. If there is no file for your city, Claude does not run. It offers the upload link and may suggest a nearby library city. It uses that city only if you agree.
+Before the first run with a weather file, Claude tells you which file it will use (city, station, source and period). A reply that does not object accepts it. If you ask Claude to assume everything and the city match is clear, Claude runs straight away and names the file in the results. If several cities share the name, Claude asks before running, and if the match is unclear, you choose. If there is no file for your city, Claude does not run. It offers the upload link and may suggest a nearby library city. It uses that city only if you agree.
 
 ## 4. What to expect
 
-- **Permission prompts.** Claude's apps may ask permission before each engine tool call and show the raw tool input. Check your inputs in the chat, not in that box. Choosing **Always allow** for the eModely tools stops the prompts. Claude still asks its questions and names the weather file in the chat.
+- **Permission prompts.** Claude's apps may ask permission before each engine tool call and show the raw tool input. Check your inputs in the chat, not in that box. Choosing **Always allow** for the eModely tools stops the prompts. Your inputs and the weather file are still discussed in the chat.
 - **What Claude reports.** Claude states the engine version, the weather file used, every default it assumed and every warning.
 - **Hourly results.** Hourly results never enter the chat. You get a download link that only your account can open. It expires within 24 hours. Ask Claude for a fresh CSV or Excel link at any time.
 - **Rows in the hourly file.** The file has one row per simulated hour, up to 8,760. Hours outside the plant's operating window, or below its minimum load, are left out. Use the `Hour`, `Month` and `HourOfDay` columns to place each row in the year.
