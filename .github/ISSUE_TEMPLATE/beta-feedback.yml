@@ -1,0 +1,57 @@
+name: Beta feedback
+description: Report a bug, a confusing step or a suggestion for the eModely Engine in Claude.
+title: "[beta] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Issues are public. Leave out client names, project locations, drawings, export links and chat share links.
+        For anything confidential, email support@emodely.com instead.
+  - type: dropdown
+    id: app
+    attributes:
+      label: App
+      options:
+        - claude.ai (web)
+        - Claude desktop app
+        - Claude mobile
+        - Claude Code
+    validations:
+      required: true
+  - type: input
+    id: when
+    attributes:
+      label: Date and time (with time zone)
+      placeholder: 8 Oct 2026, 14:30 GST
+    validations:
+      required: true
+  - type: textarea
+    id: prompt
+    attributes:
+      label: Your prompt
+      description: What you asked Claude, with confidential details removed.
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened, and what you expected
+    validations:
+      required: true
+  - type: input
+    id: engine-weather
+    attributes:
+      label: Engine version and weather file that Claude reported
+      placeholder: engine version 3, Dubai library file
+  - type: textarea
+    id: errors
+    attributes:
+      label: Error messages or screenshots
+      description: Copy error messages word for word. You can paste screenshots here.
+  - type: checkboxes
+    id: confidential
+    attributes:
+      label: Confidentiality
+      options:
+        - label: I removed confidential project details from this report.
+          required: true

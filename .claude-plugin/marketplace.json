@@ -1,6 +1,6 @@
 {
   "name": "emodely",
-  "description": "eModely plugins for Claude (private).",
+  "description": "eModely plugins for Claude.",
   "owner": { "name": "eModely", "url": "https://emodely.com" },
   "plugins": [
     {

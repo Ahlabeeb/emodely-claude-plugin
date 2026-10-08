@@ -13,7 +13,7 @@ fail=0
 report() { echo "LEAK-CHECK FAIL: $*" >&2; fail=1; }
 
 # 1. Allow-list of tracked files.
-allowed='^(\.claude-plugin/marketplace\.json|plugins/emodely-engine/\.claude-plugin/plugin\.json|plugins/emodely-engine/\.mcp\.json|plugins/emodely-engine/skills/[a-z0-9-]+/SKILL\.md|README\.md|LICENSE|docs/[a-z0-9-]+\.md|scripts/check-no-leaks\.sh|scripts/package-plugin\.sh|\.github/workflows/[a-z0-9-]+\.yml|\.gitignore|\.gitattributes)$'
+allowed='^(\.claude-plugin/marketplace\.json|plugins/emodely-engine/\.claude-plugin/plugin\.json|plugins/emodely-engine/\.mcp\.json|plugins/emodely-engine/skills/[a-z0-9-]+/SKILL\.md|README\.md|SECURITY\.md|LICENSE|docs/[a-z0-9-]+\.md|scripts/check-no-leaks\.sh|scripts/package-plugin\.sh|\.github/workflows/[a-z0-9-]+\.yml|\.github/ISSUE_TEMPLATE/[a-z0-9-]+\.yml|\.gitignore|\.gitattributes)$'
 while IFS= read -r f; do
   [[ "$f" =~ $allowed ]] || report "file not on the allow-list: $f"
 done < <(git ls-files)
