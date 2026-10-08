@@ -10,5 +10,7 @@ fi
 version=$(git show HEAD:plugins/emodely-engine/.claude-plugin/plugin.json | sed -n 's/.*"version": *"\([^"]*\)".*/\1/p')
 mkdir -p dist
 out="dist/emodely-engine-${version}.zip"
-git archive --format=zip -o "$out" HEAD:plugins/emodely-engine
+# core.autocrlf=false: a tree-ish subfolder archive ignores the root .gitattributes,
+# so a Windows checkout would otherwise pack CRLF line endings.
+git -c core.autocrlf=false archive --format=zip -o "$out" HEAD:plugins/emodely-engine
 echo "$out"

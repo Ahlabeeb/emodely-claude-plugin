@@ -73,7 +73,7 @@ The plugin adds the connector and a skill that guides Claude. It needs a paid pl
    - **Add marketplace.** Enter `Ahlabeeb/emodely-claude-plugin`, then add **eModely Engine** from that marketplace.
    - **Upload plugin.** Download `emodely-engine-<version>.zip` from the [latest release](https://github.com/Ahlabeeb/emodely-claude-plugin/releases/latest) and upload it. Do not unzip it.
 3. Open the **eModely Engine** plugin and go to its **Connectors** tab. `emodely-engine` may show **Not added**; that is expected. On a Team or Enterprise plan, an Owner may have to add it for the organization (see below).
-4. Click **Connect** next to `emodely-engine` (or **Add**, then **Connect**, if both are shown). If a connector dialog opens with the name and URL filled in, click **Continue**, keep **Sign in now** and **Register automatically**, and click **Add**. Sign in on engine.emodely.com and click **Allow**. If it shows **Connected** straight away, you signed in before.
+4. Click **Connect** next to `emodely-engine` (or **Add**, then **Connect**, if both are shown). If a connector dialog opens with the name and URL filled in, click **Continue**, keep **Sign in now** and **Register automatically**, and click **Add**. Sign in on engine.emodely.com and click **Allow**. If no sign-in window opens, click **Connect** again. If it shows **Connected** straight away, you signed in before.
 5. In a new chat, click **+ > Connectors** and check that **emodely-engine** is switched on.
 
 ### claude.ai and the Claude desktop app: connector only
@@ -182,7 +182,7 @@ eModely stores:
 - export files;
 - usage logs.
 
-Export links expire within 24 hours, and the files are deleted shortly afterwards. Usage logs are kept for about 180 days. Data is stored in the European Union. eModely does not sell your data and does not use your inputs to train AI models.
+Export links expire within 24 hours, and the files are deleted shortly afterwards. Usage logs are kept for about 180 days. The database is hosted in the European Union (Frankfurt); section 8 of the Terms of Use describes where data is processed and how backups are kept. eModely does not sell your data and does not use your inputs to train AI models.
 
 Your conversations with Claude stay with Anthropic. eModely receives only the requests that Claude sends to the engine. The details are in section 8 of the [Terms of Use](https://engine.emodely.com/terms) and in the [Privacy Policy](https://emodely.com/privacy).
 
