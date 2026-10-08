@@ -80,9 +80,9 @@ The plugin adds the connector and a skill that guides Claude. It needs a paid pl
 
 This works on every plan, including Free. Claude still follows the engine's own guidance.
 
-1. Open **Customize > Connectors** and click **Add custom connector**. On some accounts the button is **Add**, then **Custom**, then **Web**.
-2. Enter the name `eModely Engine` and the URL `https://engine.emodely.com/mcp`. Leave **Advanced settings** empty, then click **Add**. If the dialog asks how people sign in, choose **Sign in now**. If it asks about the OAuth client, choose **Register automatically**.
-3. Click **Connect**, sign in on engine.emodely.com, and click **Allow**.
+1. Open **Customize > Connectors**, click **Add**, then **Add custom connector**. On some accounts it is **Add**, then **Custom**, then **Web**.
+2. Enter the name `eModely Engine` and the URL `https://engine.emodely.com/mcp`, then click **Continue**. Keep **Sign in now** under Authentication and **Register automatically** under OAuth client (both are selected for you), add no request headers, and click **Add**. Older versions of the dialog show **Advanced settings** and an **Add** button straight away: leave the advanced settings empty and click **Add**.
+3. Click **Connect**, sign in on engine.emodely.com, and click **Allow**. If the connector shows as connected straight away, you signed in before and there is nothing more to do.
 4. In a new chat, click **+ > Connectors** and check that **eModely Engine** is switched on.
 
 If you already added this custom connector, the plugin uses it, so there is nothing to remove.
