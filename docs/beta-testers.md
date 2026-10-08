@@ -19,7 +19,7 @@ When the browser window opens on engine.emodely.com, sign in and click **Allow**
 ## 3. What to try
 
 1. Run the three prompts in [section 2 of the README](../README.md#2-first-run): a new water-cooled plant, an existing air-cooled plant, and a comparison of two options.
-2. Run a plant from one of your own projects. Leave out client names.
+2. Run a plant from one of your own projects. Leave out client names. Try each way to start at least once: Quick, Detailed and Just assume.
 3. Ask for the hourly results as Excel, and open the download link.
 4. Change one input, re-run, and ask Claude to compare the two runs.
 5. Try a city that is not in the library, and upload your own EPW file through the link Claude gives you.
