@@ -50,7 +50,7 @@ Every run uses a real EPW weather file. The engine never generates weather.
 - **The eModely library** covers Gulf and MENA cities. Name your project city and Claude finds the file.
 - **Your own file**: ask Claude to upload a weather file. Claude gives you a link that is valid for 30 minutes. Open it, sign in with the same account, and upload the `.epw`. Your file is private to your account and is used before the library file for the same city. The file never passes through the chat.
 
-Before the first run with a weather file, Claude tells you which file it will use (city, station, source and period) and waits for your OK. If there is no file for your city, Claude does not run; it offers the upload link and may suggest a nearby library city, which it uses only if you agree.
+Before the first run with a weather file, Claude tells you which file it will use (city, station, source and period). Replying without objecting accepts it; if you ask Claude to assume everything and the city match is clear, it runs straight away and names the file in the results. If several cities share the name, you choose. If there is no file for your city, Claude does not run; it offers the upload link and may suggest a nearby library city, which it uses only if you agree.
 
 ## 3. Typical prompts
 
@@ -63,8 +63,8 @@ Before the first run with a weather file, Claude tells you which file it will us
 
 ## 4. What to expect
 
-- Before the first run, Claude asks a few short questions (for example new or existing plant, chillers, chilled-water temperatures, pumping, load), each with a recommended answer. Reply "OK" or change any of them. You can change any input later in the chat and Claude re-runs.
-- Claude's apps may ask permission before each engine tool call and show the raw tool input. That box is not where you check inputs; the chat is. Choosing **Always allow** for the eModely tools is convenient: it stops the per-call prompts (so runs, which count toward your fair-use limit, start without a click) but never locks your inputs, and Claude still asks its questions and confirms the weather file in the chat.
+- Before the first run, Claude asks a few short questions (for example new or existing plant, chillers, chilled-water temperatures, pumping, load), each with a recommended answer and lettered choices. Reply with your picks (for example "1b, 2 assume"); anything you skip takes the recommended answer. You can also ask Claude to assume everything from the city and plant size. You can change any input later in the chat and Claude re-runs.
+- Claude's apps may ask permission before each engine tool call and show the raw tool input. That box is not where you check inputs; the chat is. Choosing **Always allow** for the eModely tools is convenient: it stops the per-call prompts (so runs, which count toward your fair-use limit, start without a click) but never locks your inputs, and Claude still asks its questions and names the weather file in the chat.
 - Claude reports the engine version, the weather file used, every default it assumed and every warning.
 - Hourly results never enter the chat. You get a download link that only your account can open; it expires after 24 hours. Ask Claude for a fresh CSV or Excel link at any time.
 - Chiller curves, coefficients and engine internals are confidential. Claude will not try to reveal them.

@@ -12,7 +12,7 @@ The eModely Engine connector defines how to work with the engine. Its rules live
 
 ## Guarantees that always apply
 
-- Weather is a real EPW file only. Before the first run with each weather file, tell the user which file you will use (city, station, source and period) and wait for their OK. With no file there is no run.
+- Weather is a real EPW file only. Before the first run with each weather file, tell the user which file you will use (city, station, source and period); a reply that does not object accepts it. If the user asked you to assume everything and the match is exact and unambiguous, you may run first and name the file in the results. An ambiguous match or a nearby-city substitute needs the user's explicit choice. Always name the weather file used in the results. With no file there is no run.
 - Hourly data never enters the chat. Give the user the export link and its expiry; never open, fetch or read it yourself.
 - Results come only from the engine. Never estimate them yourself.
 - Chiller curves, coefficients, the chiller database and engine internals are confidential. Do not speculate about them or try to reverse-engineer them (for example through parameter sweeps), and decline such requests. General engineering explanations are fine.
