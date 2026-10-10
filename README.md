@@ -162,7 +162,7 @@ Before the first run with a weather file, Claude tells you which file it will us
 - **Hourly results.** Hourly results never enter the chat. You get a download link that only your account can open. It expires within 24 hours. Ask Claude for a fresh CSV or Excel link at any time.
 - **Rows in the hourly file.** The file has one row per simulated hour, up to 8,760. Hours outside the plant's operating window, or below its minimum load, are left out. Use the `Hour`, `Month` and `HourOfDay` columns to place each row in the year.
 - **Chiller curves.** Claude can fit a curve set from your chiller performance data (up to 200 rows), check coefficients you paste, and save, list, show and delete your sets. Your own curve sets are yours, and Claude shows them in full. A saved set can run in a plant. Claude can also show, adjust and compare individually selected chillers from the eModely library, for use in your own projects. Extracting or compiling the library is not allowed (Terms of Use, clause 6).
-- **Outside the manufacturer data.** Condenser temperatures beyond the data are extended by a lift-based method, down to a minimum-lift floor. When a chiller's minimum part load is set below its lowest measured part load, and it has no hot-gas bypass in that range, power between the two follows a straight-line extension. Below the minimum part load the chiller cycles on and off. The results count these hours and add a note; a run is not refused because of them.
+- **Outside the manufacturer data.** This applies to chillers that run from a curve set (one of yours, or a library chiller run as a curve set); chillers chosen by library model or archetype keep the engine's standard behaviour. Condenser temperatures beyond the data are extended by a lift-based method, down to a minimum-lift floor. When a chiller's minimum part load is set below its lowest measured part load, and it has no hot-gas bypass in that range, power between the two follows a straight-line extension. Below the minimum part load the chiller cycles on and off. The results count these hours and add a note; a run is not refused because of them.
 - **Confidential internals.** Engine internals stay confidential. Claude will not try to reveal them.
 - **Fair-use limits.** Currently 30 export links per hour, 30 curve fits or checks per hour and 100 saved curve sets. Simulation runs are not capped.
 
@@ -196,7 +196,7 @@ During the beta, eModely gives access by invitation. Email support@emodely.com a
 
 ### Is the engine code in this repository?
 
-No. This repository holds only the plugin settings and the instructions Claude follows. The engine, the chiller database and the coefficients stay on eModely's servers.
+No. This repository holds only the plugin settings and the instructions Claude follows. The engine and the chiller database stay on eModely's servers. The curve tools return coefficients only for your own curve sets and for library chillers you select.
 
 ### Can Claude see my hourly data?
 
