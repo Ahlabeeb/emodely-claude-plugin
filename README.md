@@ -1,6 +1,6 @@
 # eModely Engine for Claude
 
-Simulate chiller plants and district cooling plants by talking to Claude. You describe the plant in plain words. Claude asks a few short questions, picks a real weather file with you, and runs the plant for a full year on the eModely engine.
+Simulate chiller plants and district cooling plants by talking to Claude. You describe the plant in plain words. Claude asks a few short questions, picks a real weather file with you, and runs the plant for a full year on the eModely engine. Claude can also fit, check and compare chiller performance curves, and run a plant with them.
 
 **The results come from the eModely engine, not from an AI estimate.** Claude collects the inputs and explains the results. The calculation runs on eModely's servers, with the same engine as the eModely web app.
 
@@ -161,8 +161,10 @@ Before the first run with a weather file, Claude tells you which file it will us
 - **What Claude reports.** Claude states the engine version, the weather file used, every default it assumed and every warning.
 - **Hourly results.** Hourly results never enter the chat. You get a download link that only your account can open. It expires within 24 hours. Ask Claude for a fresh CSV or Excel link at any time.
 - **Rows in the hourly file.** The file has one row per simulated hour, up to 8,760. Hours outside the plant's operating window, or below its minimum load, are left out. Use the `Hour`, `Month` and `HourOfDay` columns to place each row in the year.
-- **Confidential internals.** Chiller curves, coefficients and engine internals are confidential. Claude will not try to reveal them.
-- **Fair-use limits.** Currently 60 simulations and 30 export links per hour.
+- **Chiller curves.** Claude can fit a curve set from your chiller performance data (up to 200 rows), check coefficients you paste, and save, list, show and delete your sets. Your own curve sets are yours, and Claude shows them in full. A saved set can run in a plant. Claude can also show, adjust and compare individually selected chillers from the eModely library, for use in your own projects. Extracting or compiling the library is not allowed (Terms of Use, clause 6).
+- **Outside the manufacturer data.** This applies to chillers that run from a curve set (one of yours, or a library chiller run as a curve set); chillers chosen by library model or archetype keep the engine's standard behaviour. Condenser temperatures beyond the data are extended by a lift-based method, down to a minimum-lift floor. When a chiller's minimum part load is set below its lowest measured part load, and it has no hot-gas bypass in that range, power between the two follows a straight-line extension. Below the minimum part load the chiller cycles on and off. The results count these hours and add a note; a run is not refused because of them.
+- **Confidential internals.** Engine internals stay confidential. Claude will not try to reveal them.
+- **Fair-use limits.** Currently 30 export links per hour, 30 curve fits or checks per hour, 50 new curve sets (including drafts) per day and 100 saved curve sets. Simulation runs are not capped.
 
 ## 5. FAQ
 
@@ -177,6 +179,8 @@ eModely stores:
 - your account email and sign-in records;
 - your subscription;
 - the plants you save;
+- your chiller curve sets and the performance data you fit them from;
+- a record of each library chiller you view;
 - the inputs and annual summaries of your runs;
 - weather files you upload;
 - export files;
@@ -192,7 +196,7 @@ During the beta, eModely gives access by invitation. Email support@emodely.com a
 
 ### Is the engine code in this repository?
 
-No. This repository holds only the plugin settings and the instructions Claude follows. The engine, the chiller database and the coefficients stay on eModely's servers.
+No. This repository holds only the plugin settings and the instructions Claude follows. The engine and the chiller database stay on eModely's servers. The curve tools return coefficients only for your own curve sets and for library chillers you select.
 
 ### Can Claude see my hourly data?
 
