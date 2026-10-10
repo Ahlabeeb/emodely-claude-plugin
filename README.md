@@ -164,7 +164,7 @@ Before the first run with a weather file, Claude tells you which file it will us
 - **Chiller curves.** Claude can fit a curve set from your chiller performance data (up to 200 rows), check coefficients you paste, and save, list, show and delete your sets. Your own curve sets are yours, and Claude shows them in full. A saved set can run in a plant. Claude can also show, adjust and compare individually selected chillers from the eModely library, for use in your own projects. Extracting or compiling the library is not allowed (Terms of Use, clause 6).
 - **Outside the manufacturer data.** This applies to chillers that run from a curve set (one of yours, or a library chiller run as a curve set); chillers chosen by library model or archetype keep the engine's standard behaviour. Condenser temperatures beyond the data are extended by a lift-based method, down to a minimum-lift floor. When a chiller's minimum part load is set below its lowest measured part load, and it has no hot-gas bypass in that range, power between the two follows a straight-line extension. Below the minimum part load the chiller cycles on and off. The results count these hours and add a note; a run is not refused because of them.
 - **Confidential internals.** Engine internals stay confidential. Claude will not try to reveal them.
-- **Fair-use limits.** Currently 30 export links per hour, 30 curve fits or checks per hour and 100 saved curve sets. Simulation runs are not capped.
+- **Fair-use limits.** Currently 30 export links per hour, 30 curve fits or checks per hour, 50 new curve sets (including drafts) per day and 100 saved curve sets. Simulation runs are not capped.
 
 ## 5. FAQ
 

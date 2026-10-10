@@ -55,4 +55,4 @@ We want to hear about anything that is wrong, confusing or slow. Examples:
 - Results are engineering estimates. Check the inputs and results. You remain responsible for design and investment decisions.
 - Do not try to reverse-engineer the engine. This includes running systematic series of simulations to map its behaviour.
 - Library chiller curves are for use in your own projects. Do not extract or compile the chiller library, for example by viewing many chillers one after another.
-- Fair-use limits apply: currently 30 export links per hour, 30 curve fits or checks per hour and 100 saved curve sets. Simulation runs are not capped.
+- Fair-use limits apply: currently 30 export links per hour, 30 curve fits or checks per hour, 50 new curve sets (including drafts) per day and 100 saved curve sets. Simulation runs are not capped.
