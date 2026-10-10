@@ -23,6 +23,7 @@ When the browser window opens on engine.emodely.com, sign in and click **Allow**
 3. Ask for the hourly results as Excel, and open the download link.
 4. Change one input, re-run, and ask Claude to compare the two runs.
 5. Try a city that is not in the library, and upload your own EPW file through the link Claude gives you.
+6. Try the chiller curves. Give Claude a small performance table for a chiller, let it fit and save a curve set, and run a plant with it. Then ask Claude to show one library chiller, adjust it (for example its rated COP) and compare it with your set.
 
 ## 4. What to report
 
@@ -53,4 +54,5 @@ We want to hear about anything that is wrong, confusing or slow. Examples:
 - Use of the engine is subject to the [eModely Engine Terms of Use](https://engine.emodely.com/terms) and the [eModely Privacy Policy](https://emodely.com/privacy).
 - Results are engineering estimates. Check the inputs and results. You remain responsible for design and investment decisions.
 - Do not try to reverse-engineer the engine. This includes running systematic series of simulations to map its behaviour.
-- Fair-use limits apply: currently 60 simulations and 30 export links per hour.
+- Library chiller curves are for use in your own projects. Do not extract or compile the chiller library, for example by viewing many chillers one after another.
+- Fair-use limits apply: currently 30 export links per hour, 30 curve fits or checks per hour and 100 saved curve sets. Simulation runs are not capped.

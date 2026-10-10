@@ -1,6 +1,6 @@
 # eModely Engine for Claude
 
-Simulate chiller plants and district cooling plants by talking to Claude. You describe the plant in plain words. Claude asks a few short questions, picks a real weather file with you, and runs the plant for a full year on the eModely engine.
+Simulate chiller plants and district cooling plants by talking to Claude. You describe the plant in plain words. Claude asks a few short questions, picks a real weather file with you, and runs the plant for a full year on the eModely engine. Claude can also fit, check and compare chiller performance curves, and run a plant with them.
 
 **The results come from the eModely engine, not from an AI estimate.** Claude collects the inputs and explains the results. The calculation runs on eModely's servers, with the same engine as the eModely web app.
 
@@ -161,8 +161,10 @@ Before the first run with a weather file, Claude tells you which file it will us
 - **What Claude reports.** Claude states the engine version, the weather file used, every default it assumed and every warning.
 - **Hourly results.** Hourly results never enter the chat. You get a download link that only your account can open. It expires within 24 hours. Ask Claude for a fresh CSV or Excel link at any time.
 - **Rows in the hourly file.** The file has one row per simulated hour, up to 8,760. Hours outside the plant's operating window, or below its minimum load, are left out. Use the `Hour`, `Month` and `HourOfDay` columns to place each row in the year.
-- **Confidential internals.** Chiller curves, coefficients and engine internals are confidential. Claude will not try to reveal them.
-- **Fair-use limits.** Currently 60 simulations and 30 export links per hour.
+- **Chiller curves.** Claude can fit a curve set from your chiller performance data (up to 200 rows), check coefficients you paste, and save, list, show and delete your sets. Your own curve sets are yours, and Claude shows them in full. A saved set can run in a plant. Claude can also show, adjust and compare one selected chiller from the eModely library at a time, for use in your own projects. Extracting or compiling the library is not allowed (Terms of Use, clause 6).
+- **Outside the manufacturer data.** Condenser temperatures beyond the data are extended by a lift-based method, down to a minimum-lift floor. Loads below the lowest measured part load follow a straight-line extension. The results count these hours and add a note; such hours are never refused.
+- **Confidential internals.** Engine internals stay confidential. Claude will not try to reveal them.
+- **Fair-use limits.** Currently 30 export links per hour, 30 curve fits or checks per hour and 100 saved curve sets. Simulation runs are not capped.
 
 ## 5. FAQ
 
@@ -177,6 +179,8 @@ eModely stores:
 - your account email and sign-in records;
 - your subscription;
 - the plants you save;
+- your chiller curve sets and the performance data you fit them from;
+- a record of each library chiller you view;
 - the inputs and annual summaries of your runs;
 - weather files you upload;
 - export files;

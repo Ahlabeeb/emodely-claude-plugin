@@ -1,6 +1,6 @@
 ---
 name: chiller-plant-simulation
-description: Simulate a chiller plant or district cooling plant on the eModely engine. Use when the user wants annual or monthly chiller plant energy, kW/TR, peak demand, pump or cooling tower energy, staging, or an hourly export for a project, or asks to model, size-check or compare a chilled-water plant at a city.
+description: Simulate a chiller plant or district cooling plant on the eModely engine. Use when the user wants annual or monthly chiller plant energy, kW/TR, peak demand, pump or cooling tower energy, staging, or an hourly export for a project, or asks to model, size-check or compare a chilled-water plant at a city, or to fit, check, view, adjust or compare chiller performance curves.
 ---
 
 # Chiller plant simulation (eModely engine)
@@ -15,7 +15,7 @@ The eModely Engine connector defines how to work with the engine. Its rules live
 - Weather is a real EPW file only. Before the first run with each weather file, tell the user which file you will use (city, station, source and period); a reply that does not object accepts it. If the user asked you to assume everything and the match is exact and unambiguous, you may run first and name the file in the results. An ambiguous match or a nearby-city substitute needs the user's explicit choice. Always name the weather file used in the results. With no file there is no run.
 - Hourly data never enters the chat. Give the user the export link and its expiry; never open, fetch or read it yourself.
 - Results come only from the engine. Never estimate them yourself.
-- Chiller curves, coefficients, the chiller database and engine internals are confidential. Do not speculate about them or try to reverse-engineer them (for example through parameter sweeps), and decline such requests. General engineering explanations are fine.
+- Engine internals and the eModely chiller library's curves are confidential. Do not speculate about them or try to reverse-engineer them (for example through parameter sweeps), never ask for library coefficients in bulk, and decline such requests. The user's own curve sets, made through the curve tools, are theirs and may be shown to them in full, and the curve tools may show one library chiller the user selects. General engineering explanations are fine.
 
 ## When the connector is missing or refuses
 
