@@ -32,6 +32,12 @@ sys.exit(0 if ok else 1)
 PY
 
 # 3. Generic forbidden content.
+repository_allowed() {
+  case "$1" in
+    ahlabeeb/emodely-claude-plugin|ahlabeeb/emodely-mcp) return 0 ;;
+    *) return 1 ;;
+  esac
+}
 patterns=(
   '([0-9]{1,3}\.){3}[0-9]{1,3}'                       # IPv4 literals (servers)
   'supabase\.(co|in)'                                 # database / auth project hosts
@@ -66,12 +72,14 @@ while IFS= read -r f; do
   for p in "${patterns[@]}" "${extra[@]}"; do
     if grep -qEi -- "$p" "$f"; then report "$f matches a forbidden pattern (line $(grep -nEi -- "$p" "$f" | head -1 | cut -d: -f1))"; fi
   done
-  # GitHub references: only this plugin repository may be named.
+  # GitHub references: only this plugin repository may be named, under its
+  # current or its previous name (the old name stays allowed because existing
+  # installs and links use it through GitHub's redirect).
   while IFS= read -r ref; do
-    [[ "$ref" == "ahlabeeb/emodely-claude-plugin" ]] || report "$f names another repository"
+    repository_allowed "$ref" || report "$f names another repository"
   done < <(grep -oiE '(github\.com[/:]|marketplace add +)[A-Za-z0-9._-]+/[A-Za-z0-9._-]+' "$f" | sed -E 's#^(github\.com[/:]|marketplace add +)##I; s#\.git$##I' | tr 'A-Z' 'a-z')
   while IFS= read -r ref; do
-    [[ "$ref" == "ahlabeeb/emodely-claude-plugin" ]] || report "$f names another repository"
+    repository_allowed "$ref" || report "$f names another repository"
   done < <(grep -oiE 'Ahlabeeb/[A-Za-z0-9._-]+' "$f" | sed -E 's#\.git$##I' | tr 'A-Z' 'a-z')
 done < <(git ls-files)
 
